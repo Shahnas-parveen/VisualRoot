@@ -1,39 +1,33 @@
-from utils.parser import get_functions
+from utils.parser import get_function
 from utils.helpers import create_result
 
 
-def newton_method(params):
+def fixed_point_method(params):
 
     equation = params["equation"]
     x0 = params["x0"]
     tolerance = params["tolerance"]
     max_iterations = params["max_iterations"]
-
-    f, df = get_functions(equation)
+    g = get_function(equation)
 
     iterations = []
 
     for i in range(max_iterations):
 
-        fx = f(x0)
-        dfx = df(x0)
+        x1 = g(x0)
 
-        if abs(dfx) < 1e-12:
-            raise ValueError("Derivative is zero.")
-
-        x1 = x0 - fx / dfx
         error = abs(x1 - x0)
 
         iterations.append({
             "iteration": i + 1,
             "x": x1,
-            "fx": f(x1),
+            "fx": x1,
             "error": error
         })
 
         if error < tolerance:
             return create_result(
-                "Newton-Raphson",
+                "Fixed Point",
                 x1,
                 iterations,
                 True
@@ -42,7 +36,7 @@ def newton_method(params):
         x0 = x1
 
     return create_result(
-        "Newton-Raphson",
+        "Fixed Point",
         x1,
         iterations,
         False

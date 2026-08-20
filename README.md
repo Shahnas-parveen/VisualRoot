@@ -4,6 +4,11 @@
 
 VisualRoot is an interactive web application for visualizing and comparing numerical root-finding algorithms. It helps students understand **how numerical methods converge**, rather than only displaying the final answer.
 
+##  Live Demo
+
+Try VisualRoot here:
+
+[Launch VisualRoot](https://visualroot.streamlit.app/)
 ---
 
 ## Features
